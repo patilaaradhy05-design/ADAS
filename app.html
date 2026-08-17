@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Studio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080808;
+    color: white;
+    transition: 0.3s;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(8, 8, 8, 0.8);
+    backdrop-filter: blur(15px);
+
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #00eaff;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #00eaff;
+}
+
+#themeBtn {
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+    padding: 10px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 120px 10% 70px;
+
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            #003b45 0%,
+            transparent 30%
+        ),
+        #080808;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.tag {
+    color: #00eaff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(55px, 8vw, 100px);
+    line-height: 0.95;
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    color: #00eaff;
+}
+
+.hero-text > p:not(.tag) {
+    color: #aaa;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+/* BUTTON */
+.main-btn {
+    margin-top: 30px;
+
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #00eaff;
+    color: #001014;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.main-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 234, 255, 0.25);
+}
+
+/* HERO CARD */
+.hero-card {
+    width: 350px;
+    height: 350px;
+
+    border: 1px solid #222;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(145deg, #111, #080808);
+
+    box-shadow: 0 0 80px rgba(0, 234, 255, 0.08);
+}
+
+.circle {
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    border: 3px solid #00eaff;
+
+    box-shadow:
+        0 0 30px #00eaff,
+        inset 0 0 30px rgba(0, 234, 255, 0.3);
+
+    margin-bottom: 25px;
+}
+
+.hero-card h2 {
+    letter-spacing: 5px;
+}
+
+.hero-card p {
+    color: #777;
+    margin-top: 8px;
+}
+
+/* SECTIONS */
+.section {
+    padding: 120px 10%;
+}
+
+.section h2 {
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+.description {
+    color: #999;
+    max-width: 650px;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+/* PROJECTS */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    margin-top: 50px;
+}
+
+.project {
+    min-height: 250px;
+    padding: 30px;
+
+    border: 1px solid #222;
+    border-radius: 15px;
+
+    background: #0d0d0d;
+
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: translateY(-8px);
+    border-color: #00eaff;
+}
+
+.project span {
+    color: #00eaff;
+    font-size: 13px;
+}
+
+.project h3 {
+    font-size: 25px;
+    margin: 40px 0 15px;
+}
+
+.project p {
+    color: #888;
+    line-height: 1.5;
+}
+
+.project-btn {
+    margin-top: 25px;
+
+    background: none;
+    color: #00eaff;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+/* CONTACT */
+.contact {
+    text-align: center;
+    background: #0c0c0c;
+}
+
+.contact p:not(.tag) {
+    color: #999;
+}
+
+/* FOOTER */
+footer {
+    padding: 30px;
+
+    text-align: center;
+
+    color: #555;
+
+    background: #050505;
+}
+
+/* LIGHT MODE */
+body.light {
+    background: #f4f4f4;
+    color: #111;
+}
+
+body.light header {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+body.light nav a {
+    color: #555;
+}
+
+body.light #themeBtn {
+    background: white;
+    color: black;
+}
+
+body.light .hero {
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            #bff7ff 0%,
+            transparent 30%
+        ),
+        #f4f4f4;
+}
+
+body.light .hero-card,
+body.light .project {
+    background: white;
+    border-color: #ddd;
+}
+
+body.light .section.contact {
+    background: #eaeaea;
+}
+
+body.light footer {
+    background: #ddd;
+    color: #555;
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 60px;
+    }
+
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-card {
+        width: 280px;
+        height: 280px;
+    }
+
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    .section h2 {
+        font-size: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        NOVA<span>.</span>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <button id="themeBtn">🌙</button>
+
+</header>
+
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="hero">
+
+    <div class="hero-text">
+
+        <p class="tag">
+            WELCOME TO NOVA STUDIO
+        </p>
+
+        <h1>
+            Build.<br>
+            Create.<br>
+            <span>Innovate.</span>
+        </h1>
+
+        <p>
+            A modern sample website built entirely
+            with HTML, CSS and JavaScript.
+        </p>
+
+        <button class="main-btn" id="exploreBtn">
+            Explore Projects →
+        </button>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="circle"></div>
+
+        <h2>NOVA</h2>
+
+        <p>
+            Creative Digital Studio
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about" class="section">
+
+    <p class="tag">
+        ABOUT
+    </p>
+
+    <h2>
+        We create digital experiences.
+    </h2>
+
+    <p class="description">
+        Nova Studio is a fictional creative studio
+        focused on websites, games, technology and
+        digital experiences.
+    </p>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects" class="section">
+
+    <p class="tag">
+        PROJECTS
+    </p>
+
+    <h2>
+        Featured Work
+    </h2>
+
+
+    <div class="projects">
+
+        <div class="project">
+
+            <span>01</span>
+
+            <h3>
+                Game Development
+            </h3>
+
+            <p>
+                Interactive games and experiences.
+            </p>
+
+            <button class="project-btn">
+                View →
+            </button>
+
+        </div>
+
+
+        <div class="project">
+
+            <span>02</span>
+
+            <h3>
+                Web Design
+            </h3>
+
+            <p>
+                Modern websites with clean interfaces.
+            </p>
+
+            <button class="project-btn">
+                View →
+            </button>
+
+        </div>
+
+
+        <div class="project">
+
+            <span>03</span>
+
+            <h3>
+                Technology
+            </h3>
+
+            <p>
+                Creative technology and futuristic ideas.
+            </p>
+
+            <button class="project-btn">
+                View →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="section contact">
+
+    <p class="tag">
+        CONTACT
+    </p>
+
+    <h2>
+        Have an idea?
+    </h2>
+
+    <p>
+        Let's build something awesome.
+    </p>
+
+    <button class="main-btn" id="contactBtn">
+        Get Started
+    </button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Nova Studio. Made with HTML, CSS & JS.
+    </p>
+
+</footer>
+
+
+<script>
+
+// DARK / LIGHT MODE
+
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("light");
+
+    if (document.body.classList.contains("light")) {
+
+        themeBtn.textContent = "☀️";
+
+    } else {
+
+        themeBtn.textContent = "🌙";
+
+    }
+
+});
+
+
+// EXPLORE BUTTON
+
+const exploreBtn = document.getElementById("exploreBtn");
+
+exploreBtn.addEventListener("click", () => {
+
+    document.getElementById("projects").scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+
+// CONTACT BUTTON
+
+const contactBtn = document.getElementById("contactBtn");
+
+contactBtn.addEventListener("click", () => {
+
+    alert("Thanks for your interest! 🚀");
+
+});
+
+
+// PROJECT BUTTONS
+
+const projectButtons =
+    document.querySelectorAll(".project-btn");
+
+projectButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        alert("Project page coming soon! 🚀");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
